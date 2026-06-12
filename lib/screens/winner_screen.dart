@@ -85,9 +85,7 @@ class WinnerScreen extends StatelessWidget {
           ),
           const SizedBox(height: 16),
           Text(
-            result.winnerState.name.trim().isEmpty
-                ? result.winner.displayName
-                : result.winnerState.name,
+            _getDisplayName(),
             textAlign: TextAlign.center,
             style: const TextStyle(
               color: Colors.white,
@@ -131,16 +129,16 @@ class WinnerScreen extends StatelessWidget {
         children: [
           Expanded(
             child: _buildScoreColumn(
-              'ATHLETE BLUE',
               result.blueCorner,
+              Corner.blue,
               const Color(0xFF0080FF),
             ),
           ),
           Container(width: 2, height: 80, color: Colors.white.withOpacity(0.1)),
           Expanded(
             child: _buildScoreColumn(
-              'ATHLETE RED',
               result.redCorner,
+              Corner.red,
               const Color(0xFFFF4444),
             ),
           ),
@@ -149,21 +147,27 @@ class WinnerScreen extends StatelessWidget {
     );
   }
 
-  Widget _buildScoreColumn(String label, dynamic competitor, Color color) {
+  Widget _buildScoreColumn(dynamic competitor, Corner corner, Color color) {
+    final name = competitor.name.trim();
+    final displayName = name.isEmpty ? corner.displayName : name;
+
     return Column(
       children: [
         Text(
-          label,
+          displayName,
+          textAlign: TextAlign.center,
+          maxLines: 2,
+          overflow: TextOverflow.ellipsis,
           style: TextStyle(
             color: color,
-            fontSize: 12,
+            fontSize: 14,
             fontWeight: FontWeight.bold,
-            letterSpacing: 1,
+            letterSpacing: 0.5,
           ),
         ),
         const SizedBox(height: 8),
         Text(
-          '${competitor.positiveScore + competitor.negativeScore}',
+          '${competitor.totalScore}',
           style: TextStyle(
             color: color,
             fontSize: 48,
@@ -173,9 +177,9 @@ class WinnerScreen extends StatelessWidget {
         ),
         const SizedBox(height: 4),
         Text(
-          'MINUS POINTS: ${competitor.negativeScore}',
+          'POSITIVE: ${competitor.positiveScore} | MINUS: ${competitor.negativeScore}',
           style: TextStyle(
-            color: Colors.orange.shade300,
+            color: Colors.white70,
             fontSize: 10,
             fontWeight: FontWeight.w500,
           ),
@@ -266,6 +270,17 @@ class WinnerScreen extends StatelessWidget {
       case ResolutionMethod.disqualification:
         return Icons.block;
     }
+  }
+
+  String _getDisplayName() {
+    final name = result.winnerState.name.trim();
+
+    // If name is empty, show corner name
+    if (name.isEmpty) {
+      return result.winner.displayName;
+    }
+
+    return name;
   }
 
   Widget _buildNewMatchButton(BuildContext context) {

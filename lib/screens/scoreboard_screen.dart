@@ -205,8 +205,8 @@ class ScoreboardScreen extends StatelessWidget {
           ),
           const SizedBox(height: 16),
           // Name input
-          TextField(
-            controller: TextEditingController(text: competitor.name),
+          TextFormField(
+            initialValue: competitor.name,
             onChanged: (value) => notifier.updateCompetitorName(corner, value),
             textAlign: TextAlign.center,
             style: const TextStyle(

@@ -10,9 +10,9 @@ class CompetitorState {
     this.negativeScore = 0,
   });
 
-  /// Calculate total score as sum of positive and negative scores
-  /// Note: Can be negative if negativeScore exceeds positiveScore
-  int get totalScore => positiveScore + negativeScore;
+  /// Calculate total score as positive minus negative scores
+  /// Negative scores reduce the total
+  int get totalScore => positiveScore - negativeScore;
 
   /// Create a copy with optional field updates
   CompetitorState copyWith({

@@ -10,8 +10,8 @@ class MatchStateNotifier extends ChangeNotifier {
   final StorageService _storageService;
 
   // State properties
-  CompetitorState _blueCorner = const CompetitorState(name: 'BLUE CORNER');
-  CompetitorState _redCorner = const CompetitorState(name: 'RED CORNER');
+  CompetitorState _blueCorner = const CompetitorState(name: '');
+  CompetitorState _redCorner = const CompetitorState(name: '');
   Duration _timerRemaining = const Duration(seconds: 180);
   Duration _timerInitial = const Duration(seconds: 180);
   MatchStatus _matchState = MatchStatus.fresh;
@@ -255,8 +255,8 @@ class MatchStateNotifier extends ChangeNotifier {
   void resetMatch() {
     stopTimer();
 
-    _blueCorner = const CompetitorState(name: 'BLUE CORNER');
-    _redCorner = const CompetitorState(name: 'RED CORNER');
+    _blueCorner = const CompetitorState(name: '');
+    _redCorner = const CompetitorState(name: '');
     _timerRemaining = _timerInitial;
     _matchState = MatchStatus.fresh;
     _advantage = null;
