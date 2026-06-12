@@ -116,7 +116,7 @@ class ScoreboardScreen extends StatelessWidget {
           ),
           icon: Icon(isActive ? Icons.pause : Icons.play_arrow, size: 28),
           label: Text(
-            isActive ? 'PAUSE' : 'AKHAE',
+            isActive ? 'THOMA' : 'AKHAE',
             style: const TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
           ),
         ),
