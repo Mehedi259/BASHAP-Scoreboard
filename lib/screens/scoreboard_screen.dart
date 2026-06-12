@@ -206,6 +206,7 @@ class ScoreboardScreen extends StatelessWidget {
           const SizedBox(height: 16),
           // Name input
           TextFormField(
+            key: ValueKey('${corner.name}_reset_${notifier.resetCounter}'),
             initialValue: competitor.name,
             onChanged: (value) => notifier.updateCompetitorName(corner, value),
             textAlign: TextAlign.center,

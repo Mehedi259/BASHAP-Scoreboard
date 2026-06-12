@@ -17,6 +17,7 @@ class MatchStateNotifier extends ChangeNotifier {
   MatchStatus _matchState = MatchStatus.fresh;
   Corner? _advantage;
   Timer? _timer;
+  int _resetCounter = 0;
 
   // Getters
   CompetitorState get blueCorner => _blueCorner;
@@ -25,6 +26,7 @@ class MatchStateNotifier extends ChangeNotifier {
   Duration get timerInitial => _timerInitial;
   MatchStatus get matchState => _matchState;
   Corner? get advantage => _advantage;
+  int get resetCounter => _resetCounter;
 
   MatchStateNotifier(this._storageService) {
     _loadTimerPreference();
@@ -260,6 +262,7 @@ class MatchStateNotifier extends ChangeNotifier {
     _timerRemaining = _timerInitial;
     _matchState = MatchStatus.fresh;
     _advantage = null;
+    _resetCounter++;
 
     notifyListeners();
   }
